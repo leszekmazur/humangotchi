@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+	<html lang="en" data-ng-app='HUMANGOTCHIAPP'>
+	<head>
+		<meta http-equiv="content-type" meta="" name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"><title>HUMANGOThi</title>
+		<link href="assets/kinologo.ico" rel="shortcut icon" type="image/x-icon">
+		<meta http-equiv="X-UA-Compatible" content="IE=9">
+		<meta http-equiv="Content-Language" content="pl">
+		<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+		<meta http-equiv='expires' content='0'>
+		<meta http-equiv='pragma' content='no-cache'>
+		<meta http-equiv="cache-control" content="max-age=0">
+		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT">
+
+		<link rel="stylesheet" href="w3.css">
+		<link rel="stylesheet" href="reset.css">
+		<link rel="stylesheet" href="icons.css">
+		<link rel="stylesheet" href="entities.css">
+		<link rel="stylesheet" href="maincss.css">
+		<link rel="stylesheet" href="cardflip.css">
+		<link rel="stylesheet" href="native.css">
+		<link rel="stylesheet" href="dragging.css">
+		<link rel="stylesheet" href="gridcss.css">
+		<link rel="stylesheet" href="balloon.min.css">
+		
+		
+		<noscript>Javascript!</noscript>
+	</head>
+	<body>
+		<div data-ng-controller='HUMANCONTRL' data-ng-init="init()">
+			<div class="gridcontainer">
+				<div class="masonry grid fullheight ">
+					<div id="con0" class="item mcell tcon" masonryTile>
+						<section class="container">
+							<div id="card0" class="card noresize" data-ng-click="flipcard('card0',$event)">
+								<figure class="front lm-black">
+									<div class="w3-container w3-amber mini-padding-horizontal">
+										<div class="topnav">
+											<div class="w3-row">
+												<div class="w3-col s8 m6 l6 padding4and8">
+													<span class="line w3-xxxlarge w3-left my36pxfont">{{time.hou}}</span>
+													<span class="line w3-xlarge texttopalign myunderline w3-left my24pxfont">{{time.min > 9 ? time.min : '0' + time.min}}</span>
+												</div>
+												<div class="w3-col s4 m6 l6 padding4and8nobottom">
+													<span class="ico ico-stop-circled lm-text-black w3-right w3-xxxlarge clickable my36pxfont" data-ng-click="pauseClick()" data-ng-show="!paused"></span>
+													<span class="ico ico-play-circled lm-text-black w3-right w3-xxxlarge clickable my36pxfont" data-ng-click="pauseClick()" data-ng-show="paused"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="w3-container padding4and8 mini-margin-vertical">
+										<div>
+											<label class="w3-small w3-text-amber" data-ng-show="!paused && mt == 0">MAX FAST</label>
+											<label class="w3-small w3-text-amber" data-ng-show="!paused && mt == 250">FAST</label>
+											<label class="w3-small w3-text-amber" data-ng-show="!paused && mt == 500">NORMAL</label>
+											<label class="w3-small w3-text-amber" data-ng-show="!paused && mt == 750">SLOW</label>
+											<label class="w3-small w3-text-amber" data-ng-show="!paused && mt == 1000">MAX SLOW</label>
+											<label class="w3-small w3-text-amber" data-ng-show="paused">PAUSED</label>
+											<input type=range min=0 max=1000 step=250 data-ng-model="mt" data-ng-change="refreshTimer()" class="green lmamber" data-ng-show="!paused">
+										</div>
+									</div>
+								</figure>
+								<figure class="back w3-amber autooverflow w3-border-bottom lm-border-black">
+									<table class="w3-table w3-striped">
+										<tbody>
+										<tr>
+										  <td>DAY OF LIFE:</td><td>{{time.mem.da}}</td>
+										</tr>
+										<tr>
+										  <td>WEEK OF LIFE:</td><td>{{time.mem.we}}</td>
+										</tr>
+										<tr>
+										  <td>MONTH OF LIFE:</td><td>{{time.mem.mo}}</td>
+										</tr>
+										<tr>
+										  <td>YEAR OF LIFE:</td><td>{{time.mem.ye}}</td>
+										</tr>
+										</tbody>
+									</table>
+								</figure>
+							</div>
+						</section>
+					</div>
+					<div id="con1" class="item mcell tcon">
+						<section class="container">
+							<div id="card1" class="card" data-ng-click="flipcard('card1',$event)">
+								<figure class="front lm-black autooverflow">
+									<div class="w3-container w3-amber">
+										<div class="topnav">
+											<div class="w3-left"><a><span class="ico ico-fast-food lm-text-black w3-large defaultcursor"></span></a></div>
+											<div class="w3-right"><a><span class="lm-text-black defaultcursor">RESOURCES</span></a></div>
+										</div>
+									</div>
+									<div class="lm-black w3-container w3-padding-4 padding-horizontal">
+										<span class="w3-left w3-text-amber w3-tiny">FOOD</span>
+										<div data-balloon="{{'Poziom jedzenia ' + human.params.f + '/1000'}}" data-balloon-pos="down" class="w3-right w3-progress-container nopadding myprogress margin-vertical">
+											<div class="{{human.params.f > 100 ? 'w3-progressbar pauseanim nomargin stripes w3-blue' : 'w3-progressbar pauseanim nomargin stripes w3-red'}}" style="width: {{(human.params.f/1000)*100 + '%'}};"></div>
+										</div>
+										<div>
+											<span class="line w3-text-amber w3-left my24pxfont w3-left">{{human.params.f}}</span>
+											<span class="line w3-text-amber w3-left my18pxfont w3-right">{{human.fall.f}}</span>
+										</div>
+									</div>
+									
+									<br class="minicase768"/>
+									<hr class="amberline mini-margin-vertical"/>
+									
+									<div class="lm-black w3-container w3-padding-4 padding-horizontal">
+										<span class="w3-left w3-text-amber w3-tiny">MORALE</span>
+										<div data-balloon="{{'Poziom morale ' + human.params.m + '/1000'}}" data-balloon-pos="down" class="w3-right w3-progress-container nopadding myprogress margin-vertical">
+											<div class="{{human.params.m > 100 ? 'w3-progressbar pauseanim nomargin stripes w3-green' : 'w3-progressbar pauseanim nomargin stripes w3-red'}}" style="width: {{(human.params.m/1000)*100 + '%'}};"></div>
+										</div>
+										<div class="margin-vertical">
+											<span class="line w3-text-amber w3-xxxlarge w3-left my24pxfont w3-left">{{human.params.m}}</span>
+											<span class="line w3-text-amber w3-xxlarge w3-left my18pxfont w3-right">{{human.fall.m}}</span>
+										</div>
+									</div>
+								</figure>
+								<figure class="back w3-amber autooverflow w3-border-bottom lm-border-black">
+									<table class="w3-table w3-striped">
+										<tr>
+										  <td>BUTTON</td><td>NAME</td><td>ADDS</td><td>COST</td>
+										</tr>
+										<tr data-ng-show="testForRestrictAF(fidx)" class="{{testForItemCost('f',fidx) ? 'w3-green w3-padding-8 autoheight w3-row' : 'w3-red w3-padding-8 autoheight w3-row'}}" data-ng-repeat="fi in resours.rfl" data-ng-init="fidx = $index">
+											<td><button class="btnround clickable" data-ng-init="fbid = 'food' + fidx" id="{{fbid}}" data-ng-click="itemEndDrag(fbid,null)"><img src="{{fi.l}}" class="w3-circle" style="max-height:48px;"></button></td>
+											<td><span class="w3-large">{{fi.n}}</span></td>
+											<td><span class="w3-large">{{fi.b}}</span></td>
+											<td><span class="w3-large">{{fi.c}}</span></td>
+										</tr>
+									</table>
+								</figure>
+							</div>
+						</section>
+					</div>
+					<div id="con5" class="item mcell tcon">
+						<section class="container">
+							<div id="card6" class="card" data-ng-click="flipcard('card6',$event)">
+								<figure class="front lm-black autooverflow">
+									<div class="w3-container w3-amber">
+										<div class="topnav">
+											
+											<div class="w3-left"><a><span class="ico ico-user lm-text-black w3-large defaultcursor"></span><span class="ico ico-tint lm-text-black defaultcursor mini-margin-horizontal" data-ng-show="human.sick.v"></span></a></div>
+											
+											<div class="w3-right mini-margin-horizontal"><a><span class="ico ico-female lm-text-black w3-large defaultcursor" data-ng-show="human.iswoman"></span></a></div>
+											<div class="w3-right mini-margin-horizontal"><a><span class="ico ico-male lm-text-black w3-large defaultcursor" data-ng-show="!human.iswoman"></span></a></div>
+											
+											
+											<div class="w3-right"><a><span class="lm-text-black defaultcursor">{{human.name}}</span></a></div>
+										</div>
+									</div>
+									<div class="lm-black mini-margin-vertical w3-padding-4 padding-horizontal">
+										<span class="line w3-text-amber w3-xxlarge my18pxfont w3-left">{{'money: ' + human.money}}</span>
+									</div>
+									<hr class="amberline"/>
+									<div class="lm-black w3-padding-4 padding-horizontal">
+										<span class="w3-left w3-text-amber w3-tiny">REST</span>
+										<!--<progress class="{{human.params.r > 100 ? 'purpleprogss' : 'redprogss'}}" max="1000" value="{{human.params.r}}"></progress>-->
+										<div data-balloon="{{'Poziom odpoczynku ' + human.params.r + '/1000'}}" data-balloon-pos="down" class="w3-right w3-progress-container nopadding myprogress mini-margin-vertical">
+											<div class="{{human.params.r > 100 ? 'w3-progressbar pauseanim nomargin stripes w3-deep-purple' : 'w3-progressbar pauseanim nomargin stripes w3-red'}}" style="width: {{(human.params.r/1000)*100 + '%'}};"></div>
+										</div>
+										<span class="line w3-text-amber w3-left my24pxfont w3-left">{{human.params.r}}</span>
+										<span class="line w3-text-amber w3-left my18pxfont w3-right">{{human.fall.r}}</span>
+									</div>
+									<br/>
+									
+								</figure>
+								<figure class="back w3-amber w3-border-bottom lm-border-black">
+									<div class="topnav w3-black toprightleftborder w3-text-amber">
+										<span>STATUS</span>
+									</div>
+									<div class="margin-vertical">
+										<ul class="lmulba w3-card-4">
+											<li id="jobcard" class="mini-margin-horizontal mini-margin-vertical">
+												<div class="w3-card-4 min36pxheight w3-row">
+													<span data-ng-show="human.job.n != ''">{{'JOB NAME: ' + human.job.n | uppercase}}</span>
+													<span data-ng-show="human.job.n != ''">{{'JOB INCOME: ' + human.job.c | uppercase}}</span>
+													<span data-ng-show="human.job.n == ''">UNEMPLOYMENT</span>
+												</div>
+											</li>
+											<!--<span class="w3-text-amber">{{stats.mean.f + ' | ' + stats.mean.m + ' | ' + stats.mean.r + ' | ' + stats.mean.l + ' | ' + stats.mean.t}}</span>-->
+											<li id="statscard" class="mini-margin-horizontal mini-margin-vertical">
+												<div class="w3-card-4 min36pxheight w3-row mini-padding-horizontal mini-padding-vertical">
+													<!--
+													<div class="w3-accordion lm-black">
+														<button data-ng-click="openAccordion('ssfood')" class="w3-amber w3-btn-block w3-left-align w3-border w3-border-black mini-padding-horizontal mini-padding-vertical">
+															<span class="w3-left w3-text-black">FOOD</span>
+														</button>
+														<div class="w3-accordion-content lm-black w3-border-amber w3-border-bottom w3-border-left w3-border-right" id="ssfood">
+															<div class="fullwidth lm-black sccontainer">
+																<footer  data-ng-repeat="fit in stats.dh" data-ng-init="fsdx = $index" class="w3-amber scell w3-text-black w3-tiny" style="{{'height:' + (stats.sdata.f[fsdx] != null ? (stats.sdata.f[fsdx] / 1000) * 100 : 0) + '%;' + 'left:' + fsdx * 4.16666 + '%;'}}">
+																	{{stats.sdata.f[fsdx]}}
+																</footer>
+															</div>
+														</div>
+													</div>
+													-->
+												</div>
+											</li>
+										</ul>
+									</div>
+								</figure>
+							</div>
+						</section>
+					</div>
+					<div id="con6" class="item mcell tcon">
+						<section class="container">
+							<div id="card7" class="card" data-ng-click="flipcard('card7',$event)">
+								<figure class="front lm-black autooverflow">
+									<div class="w3-container w3-amber">
+										<div class="topnav">
+											<div class="w3-left"><a><span class="ico ico-home lm-text-black w3-large defaultcursor"></span></a></div>
+											<div class="w3-right"><a><span class="lm-text-black defaultcursor">HOME</span></a></div>
+										</div>
+									</div>
+									<div class="lm-black mini-margin-vertical w3-padding-4 padding-horizontal">
+										<button data-balloon="reguluje światło" data-balloon-pos="down" class="{{human.light ? 'w3-amber w3-btn padding2px fullwidth' : 'lm-black w3-btn padding2px fullwidth'}}" data-ng-click="turnLight()">
+											<div style="{{human.light ? 'border:1px solid black;padding:10px;' : 'border:1px solid #ffc107;padding:10px;'}}" class="{{human.light ? 'w3-amber' : 'lm-black'}}">
+												<div class="{{human.light ? 'lm-black padding2px' : 'w3-amber padding2px'}}">
+													<span class="{{human.light ? 'w3-text-amber' : 'lm-text-black'}}">{{human.light ? 'LIGHT is ON' : 'LIGHT is OFF'}}</span>
+													<span data-ng-show="human.light" class="ico ico-lightbulb w3-text-amber w3-small">
+												</div>
+											</div>
+										</button>
+									</div>
+									<hr class="amberline mini-margin-vertical"/>
+									<div class="lm-black w3-padding-4 padding-horizontal">
+										<span class="w3-left w3-text-amber w3-tiny">TRASH</span>
+										<progress class="redprogss" max="{{home.trash.m}}" value="{{home.trash.v}}"></progress>
+										<span class="line w3-text-amber w3-left my24pxfont w3-left">{{home.trash.v}}</span>
+										<span class="line w3-text-amber w3-left my18pxfont w3-left mini-margin-horizontal">{{home.trash.m}}</span>
+									</div>
+								</figure>
+								<figure class="back w3-amber w3-border-bottom lm-border-black">
+									<div class="topnav w3-black toprightleftborder w3-text-amber">
+										<span>HOME</span>
+									</div>
+									<div class="margin-vertical">
+											
+									</div>
+								</figure>
+							</div>
+						</section>
+					</div>
+					
+					<div id="con4" class="item mcell tcon">
+						<section class="container">
+							<span class="w3-text-black w3-xxlarge" style="position:absolute;z-index:999;left:4px;">{{human.ap}}</span>
+							<span class="w3-text-black w3-xxlarge" style="position:absolute;z-index:999;right:4px;">{{human.subform}}</span>
+							<div id="card4" class="card tonoflip" data-ng-click="flipcard('card4',$event)">
+									<img  class="fullwidth" src="imgs/egg.png" data-ng-show="human.ageform == 0"/>
+									<img  class="fullwidth" src="imgs/child.png" data-ng-show="human.ageform == 1"/>
+									<img  class="fullwidth" src="imgs/teenage.png" data-ng-show="human.ageform == 2"/>
+									<img  class="fullwidth" src="imgs/adult.png" data-ng-show="human.ageform == 3"/>
+									<img  class="fullwidth" src="imgs/old.png" data-ng-show="human.ageform == 4"/>
+									<img  class="fullwidth" src="imgs/dead.png" data-ng-show="human.ageform == 5"/>
+								</figure>
+								<figure class="back"></figure>
+							</div>
+						</section>
+						
+					</div>
+					<div id="con3" class="item mcell tcon">
+						<section class="container">
+							<div id="card5" class="card">
+								<figure class="front lm-black autooverflow">
+									<div class="mini-padding-horizontal mini-padding-vertical">
+										<div class="topnav w3-container w3-amber">
+											<div class="w3-left"><a><span class="ico ico-umbrella lm-text-black w3-large defaultcursor"></span></a></div>
+											<div class="w3-right"><a><span class="lm-text-black defaultcursor">ACTIONS</span></a></div>
+										</div>
+										<ul class="lmulba w3-card-4">
+											<li class="mini-margin-horizontal mini-margin-vertical" data-ng-show="testAction(aix)" data-ng-repeat="asti in resours.acl" data-ng-init="aix = $index"><!-- style="{{'background:url(' + asti.l + ');background-image:url(' + asti.l + ');background-size:contain;'}}"-->
+												<div id="{{'ad'+aix}}" class="{{'min36pxheight w3-row cybercorners w3-amber ' + (resours.acl[aix].b && resours.acl[aix].e.ac ? 'dashia' : '')}}"><!-- style="{{resours.acl[aix].b && resours.acl[aix].e.ac ? 'background: url(assets/cross-tile.png) repeat #ffc107;' : 'background-color:#ffc107;'}}"-->
+													<div class="w3-col s10 m10 l10 mini-padding-horizontal mini-padding-vertical">
+														<button class="actionbtn min36pxheight fullwidth mini-padding-horizontal" data-ng-click="useAction(aix)">
+															<span class="w3-left my18pxfont w3-text-black wordwrap">
+																{{asti.n | uppercase}}
+															</span>
+															<!--<div class="w3-right mini-margin-horizontal" data-ng-show="resours.acl[aix].b"><a><span class="ico ico-lock-2 lm-text-black w3-tiny defaultcursor"></span></a></div>-->
+															<br data-ng-show="asti.e.ac"/>
+															<div class="w3-right w3-progress-container lm-black w3-round-large margin-vertical nopadding" data-ng-show="asti.e.ac">
+																<div class="w3-progressbar pauseanim w3-red nomargin stripes w3-round-large" style="border:0;left:0;float:left;overflow:hide;width: {{(asti.e.ps/asti.r)*100 + '%'}};"></div>
+															</div>
+														</button>
+													</div>
+													<div class="w3-col s2 m2 l2 min36pxheight mini-padding-horizontal mini-padding-vertical w3-right" data-ng-click="flipActionCard('card5',$event,aix)">
+														<span class="ico ico-info lm-text-black clickable w3-right my36pxfont" data-ng-show="!resours.acl[aix].b"></span>
+														<span class="ico ico-lock-circled lm-text-black clickable w3-right my36pxfont" data-ng-show="resours.acl[aix].b"></span>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</figure>
+								<figure class="back w3-amber w3-border-bottom lm-border-black" data-ng-click="flipActionCard('card5',$event,null)">
+									<div class="w3-row">
+										<div class="w3-col s4 m4 l4 padding-horizontal padding-vertical">
+											<img src="{{resours.acl[resours.fli].l}}" class="w3-left w3-circle" style="max-height:48px;">
+										</div>
+										<div class="w3-col s8 m8 l8 padding-horizontal padding-vertical">
+											<span class="my36pxfont">{{resours.acl[resours.fli].n | uppercase}}</span>
+										</div>
+									</div>
+									<table class="w3-table w3-striped mini-padding-horizontal mini-padding-vertical w3-center">
+										<tr>
+											<td class="my24pxfont">AP</td>
+											<td class="my24pxfont">ADDS</td>
+											<td class="my24pxfont">ADDS VAL</td>
+											<td class="my24pxfont">RELOAD</td>
+										</tr>
+										<tr class="w3-green w3-padding-8 autoheight w3-row">
+											<td><span>{{resours.acl[resours.fli].a}}</span></td>
+											<td><span>{{resours.acl[resours.fli].w[resours.acl[resours.fli].w.length-1]}}</span></td>
+											<td><span>{{resours.acl[resours.fli].v}}</span></td>
+											<td><span>{{resours.acl[resours.fli].e.ps + '/' + resours.acl[resours.fli].r}}</span></td>
+										</tr>
+										<tr>
+											<td class="my24pxfont">AGEFORM</td>
+											<td class="my24pxfont">HOME</td>
+											<td class="my24pxfont">WORK</td>
+											<td class="my24pxfont">FRIENDS</td>
+											<td class="my24pxfont">SICK</td>
+										</tr>
+										<tr class="w3-green w3-padding-8 autoheight w3-row">
+											
+											<td>
+												<span data-ng-show="testActionForAgeform(resours.fli)" class="ico ico-ok"></span>
+												<span data-ng-show="!testActionForAgeform(resours.fli)" class="ico ico-cancel"></span>
+											</td>
+											<td>
+												<span data-ng-show="testActionForHomeFurniture(resours.fli)" class="ico ico-ok"></span>
+												<span data-ng-show="!testActionForHomeFurniture(resours.fli)" class="ico ico-cancel"></span>
+											</td>
+											<td>
+												<span>{{testActionForJob(resours.fli)}}</span>
+												
+											</td>
+											<td>
+												<span>{{testActionForFriends(resours.fli)}}</span>
+												
+											</td>
+											<td>
+												<span data-ng-show="testActionForHomeFurniture(resours.fli)" class="ico ico-ok"></span>
+												<span data-ng-show="!testActionForHomeFurniture(resours.fli)" class="ico ico-cancel"></span>
+											</td>
+										</tr>
+									</table>
+									<!--
+									var itm = {n:adata[a].n,
+						l:adata[a].l,
+						w:adata[a].w,
+						v:adata[a].v,
+						r:Number(adata[a].r),
+						a:Number(adata[a].a),
+						h:adata[a].h,
+						s:adata[a].s,
+						p:adata[a].p,
+						f:adata[a].f,
+						x:adata[a].x,
+						e:{ac:false,ps:0}
+			};
+			, wymagany sprzet domu, wymagany sick, wymagana praca, wymagani przyjaciele,
+									-->
+								</figure>
+							</div>
+						</section>
+					</div>
+					<div id="con2" class="item mcell tcon">
+						<section class="container">
+								<div id="card2" class="card lightcase" data-ng-click="flipcard('card2',$event)">
+									<figure class="front lm-black">
+										<div class="w3-container w3-amber">
+											<div class="topnav">
+												<div class="w3-left"><a><span class="ico ico-leaf lm-text-black w3-large defaultcursor"></span></a></div>
+												<div class="w3-right"><a><span class="lm-text-black defaultcursor">SHOP</span></a></div>
+											</div>
+										</div>
+									</figure>
+									<figure class="back w3-amber autooverflow w3-border-bottom">
+										<div class="topnav w3-black toprightleftborder w3-text-amber">
+											<span>SHOP</span>
+										</div>
+										<div class="margin-vertical lm-border-black">
+											in da shop
+										</div>
+									</figure>
+								</div>
+						</section>
+					</div>
+					
+					<div id="con7" class="item mcell tcon">
+						<section class="container">
+							<div id="card3" class="card" data-ng-click="flipcard('card3',$event)">
+								<figure class="front lm-black autooverflow">
+									<div class="w3-amber">
+										<div class="topnav w3-container">
+											<div class="w3-left"><a><span class="ico ico-fire lm-text-black w3-large defaultcursor"></span></a></div>
+											<div class="w3-right"><a><span class="lm-text-black defaultcursor">FRIENDS</span></a></div>
+										</div>
+										<div class="margin-vertical">
+											<ul class="lmulba w3-card-4">
+												<li data-ng-repeat="fri in friends.list" data-ng-init="findx = $index" class="mini-margin-horizontal mini-margin-vertical">
+													<div class="w3-card-4 min36pxheight w3-row">
+														<span>{{fri.id + ' : ' + fri.t}}</span>
+													</div>
+													
+												</li>
+											</ul>
+										</div>
+									</div>
+								</figure>
+								<figure class="back w3-amber w3-border-bottom lm-border-black">
+									<div class="topnav w3-black toprightleftborder w3-text-amber">
+										<span>OUTSIDE WORLD</span>
+									</div>
+									<div class="margin-vertical">
+										
+									</div>
+								</figure>
+							</div>
+						</section>
+					</div>
+					<div id="con8" class="item mcell tcon">
+						<section class="container">
+							<div id="card8" class="card noresize" data-ng-click="flipcard('card8',$event)">
+								<figure class="front lm-black autooverflow">
+									<div class="w3-container w3-amber lminsetblackborder">
+										<div class="topnav">
+											<div class="w3-left"><a><span class="ico ico-cogs lm-text-black w3-large defaultcursor"></span></a></div>
+											<div class="w3-right"><a><span class="lm-text-black defaultcursor">OPTIONS</span></a></div>
+										</div>
+									</div>
+									<div class="mini-padding-horizontal mini-padding-vertical">
+										
+										<div class="w3-accordion lm-black">
+											<button data-ng-click="openAccordion('opts1')" class="w3-amber w3-btn-block w3-left-align w3-border w3-border-black mini-padding-horizontal mini-padding-vertical">
+												<span class="w3-left w3-text-black">FOCUS PAUSE</span>
+											</button>
+											<div class="w3-accordion-content w3-container lm-black w3-border-amber w3-border-bottom w3-border-left w3-border-right" id="opts1">
+												<div class="ambercheckbox mini-margin-vertical w3-padding-4 padding-horizontal">
+													<input value="None" id="fpinput" name="check" checked="checked" type="checkbox" data-ng-model="options.lookforfocus">
+													<label for="fpinput" class="w3-text-amber"></label>
+												</div>
+											</div>
+										</div>
+										
+										<div class="w3-accordion lm-black">
+											<button data-ng-click="openAccordion('opts2')" class="w3-amber w3-btn-block w3-left-align w3-border w3-border-black mini-padding-horizontal mini-padding-vertical">
+												<span class="w3-left w3-text-black">FULLSCREEN</span>
+											</button>
+											<div class="w3-accordion-content w3-container lm-black w3-border-amber w3-border-bottom w3-border-left w3-border-right" id="opts2">
+												<div class="ambercheckbox mini-margin-vertical w3-padding-4 padding-horizontal">
+													<input value="None" id="ffsinput" name="check" checked="checked" type="checkbox" data-ng-model="options.fullscreen.v" data-ng-click="checkFullscreen()">
+													<label for="ffsinput"></label>
+												</div>
+											</div>
+										</div>
+										
+										<div class="w3-accordion lm-black">
+											<button data-ng-click="openAccordion('opts3')" class="w3-amber w3-btn-block w3-left-align w3-border w3-border-black mini-padding-horizontal mini-padding-vertical">
+												<span class="w3-left w3-text-black">{{'MAKE ' + human.name + ' PHOTO'}}</span>
+											</button>
+											<div class="w3-accordion-content w3-container lm-black w3-border-amber w3-border-bottom w3-border-left w3-border-right" id="opts3">
+												<div class="ambercheckbox mini-margin-vertical clickable pad1">
+													<span class="ico ico-camera w3-text-black nomargin w3-xlarge" data-ng-click="getImagePhoto('con4')"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</figure>
+								<figure class="back w3-amber w3-border-bottom lm-border-black">
+									<div class="topnav w3-black toprightleftborder w3-text-amber">
+										<span>OPTIONS</span>
+									</div>
+								</figure>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<script src="angular.min.js" type="text/javascript"></script>
+		<script src="appka.js" type="text/javascript"></script>
+		<!--
+		<script src="HUMANCONTRL.js" type="text/javascript"></script>
+		
+		<script src="HomeFactory.js" type="text/javascript"></script>
+		<script src="ItemsFactory.js" type="text/javascript"></script>
+		<script src="FriendsFactory.js" type="text/javascript"></script>
+		<script src="TimeFactory.js" type="text/javascript"></script>
+		<script src="StatisticFactory.js" type="text/javascript"></script>
+		<script src="OptionsFactory.js" type="text/javascript"></script>
+		<script src="HumanFactory.js" type="text/javascript"></script>
+		
+		<script src="jquery-1.11.1.min.js" type="text/javascript"></script>
+		<script src="masonry.pkgd.min.js" type="text/javascript"></script>
+		<script src="angular.dcb-img-fallback.min.js" type="text/javascript"></script>
+		
+		
+		<script src="angular-masonry-directive.js" type="text/javascript"></script>
+		<script src="html2canvas.js" type="text/javascript"></script>
+		<script src="FileSaver.min.js" type="text/javascript"></script>
+		-->
+	</body>
+</html>
