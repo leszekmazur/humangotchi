@@ -1,0 +1,9 @@
+{"list":[
+	{"n":"candy","l":"imgs/food1.png","b":"150","c":"20","r":[0,1,4]},
+	{"n":"burger","l":"imgs/food2.png","b":"100","c":"200","r":[0,1]},
+	{"n":"dinner","l":"imgs/food3.png","b":"150","c":"300","r":[0]},
+	{"n":"icecream","l":"imgs/food4.png","b":"200","c":"400","r":[0]},
+	{"n":"pizza","l":"imgs/food5.png","b":"250","c":"500","r":[0,1]},
+	{"n":"milk","l":"imgs/food1.png","b":"100","c":"10","r":[0,2,3,4]},
+	{"n":"neutrines","l":"imgs/food1.png","b":"50","c":"1","r":[1,2,3,4]}
+	]}

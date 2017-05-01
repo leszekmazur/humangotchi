@@ -1,0 +1,16 @@
+{"list":[
+	{"n":"trash","l":"imgs/moral1.png","w":["home","trash","v"],"v":"mm","r":20,"a":0,"h":null,"s":false,"p":false,"f":null,"x":[],"b":true},
+	{"n":"masturbation","l":"imgs/moral2.png","w":["human","params","r"],"v":30,"r":60,"a":2,"h":null,"s":false,"p":false,"f":null,"x":[0,1],"b":true},
+	{"n":"florishing","l":"imgs/moral2.png","w":["human","params","r"],"v":10,"r":20,"a":1,"h":null,"s":false,"p":false,"f":null,"x":[1,2,3,4],"b":false},
+	{"n":"console play","l":"imgs/moral3.png","w":["human","params","r"],"v":10,"r":10,"a":5,"h":["console"],"s":false,"p":false,"f":null,"x":[0],"b":false},
+	{"n":"book reading","l":"imgs/moral4.png","w":["human","ap"],"v":10,"r":40,"a":0,"h":["books"],"s":false,"p":false,"f":null,"x":[0,1],"b":false},
+	{"n":"tv watching","l":"imgs/moral5.png","w":["human","params","r"],"v":2,"r":5,"a":1,"h":["tv"],"s":false,"p":false,"f":null,"x":[0],"b":false},
+	{"n":"web surfing","l":"imgs/moral1.png","w":["human","params","r"],"v":5,"r":15,"a":5,"h":["console"],"s":false,"p":false,"f":null,"x":[0,1,2],"b":false},
+	{"n":"take medicine","l":"imgs/moral2.png","w":["human","sick","v"],"v":false,"r":15,"a":5,"h":null,"s":true,"p":false,"f":null,"x":[],"b":true},
+	{"n":"find new friend","l":"imgs/moral3.png","w":["friends","list"],"v":"nf","r":60,"a":20,"h":null,"s":false,"p":false,"f":null,"x":[0],"b":false},
+	{"n":"pet playing","l":"imgs/moral3.png","w":["human","params","m"],"v":100,"r":180,"a":30,"h":null,"s":false,"p":false,"f":["animal"],"x":[0],"b":false},
+	{"n":"friend talking","l":"imgs/moral4.png","w":["human","params","m"],"v":200,"r":180,"a":20,"h":null,"s":false,"p":false,"f":["animal"],"x":[0,1],"b":false},
+	{"n":"party","l":"imgs/moral5.png","w":["human","params","m"],"v":300,"r":10080,"a":100,"h":null,"s":false,"p":false,"f":["animal"],"x":[0,1],"b":true},
+	{"n":"working","l":"imgs/moral1.png","w":["human","money"],"v":"sc","r":60,"a":10,"h":null,"s":false,"p":true,"f":null,"x":[0,1,2,4],"b":true},
+	{"n":"find job","l":"imgs/moral1.png","w":["human","job"],"v":"nj","r":20,"a":10,"h":null,"s":false,"p":false,"f":null,"x":[0,1,2,4],"b":false}
+	]}

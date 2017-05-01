@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+	<html lang="en" data-ng-app='HUMANGOTCHIAPP'>
+	<head>
+		
+		<link rel="stylesheet" href="reset.css">
+		<link rel="stylesheet" href="w3.css">
+		<link rel="stylesheet" href="welcomestyles.css">
+		<link rel="stylesheet" href="maincss.css">
+		<link rel="stylesheet" href="native.css">
+	</head>
+	<body data-ng-controller='INDEXCONTRL' data-ng-init="init()">
+		<div class="w3-display-container fullheightw hideoverflow w3-light-grey fullheightw" data-ng-init="psl = [0,1,2,3,4,5,6]" data-ng-init="showDivs(1)">
+			<nav class="mini-margin-vertical mini-margin-horizontal halfwidth" style="position:absolute;">
+				<button data-ng-repeat="bip in psl" data-ng-click="showDivs(bip + 1)" class="line w3-btn nopadding" style="{{'max-height:64px;max-width:64px;overflow:hide;left:' + (64 * $index) + 'px;'}}">
+					<img data-ng-src="{{'imgs/slides/' + bip + '.jpg'}}" alt="slidebtn" style="max-height:inherit;max-width:inherit;"/>
+				</button>
+			</nav>
+			<img data-ng-repeat="tip in psl" data-ng-src="{{'imgs/slides/' + tip + '.jpg'}}" class="slideimg myslides" alt="plakat"/>
+		</div>
+		<!--
+		<div class="{{'w3-container w3-amber w3-padding-16 halfheight bigone ' + (ob ? 'halfheight' : 'fullheightw')}}">
+			<span class="lm-topleft">WELCOME</span>
+			<span class="lm-topright">LOAD</span>
+			<span class="lm-bottomleft" data-ng-click="switchOB()">{{nh.bo ? 'elo' : '???'}}</span>
+			<span class="lm-bottomright"><a href="#game">MORE</a></span>
+		</div>
+		<div class="w3-container w3-margin-left w3-margin-right lm-black w3-text-amber halfheight w3-padding-16" data-ng-show="ob">
+			<div class="w3-accordion w3-black">
+				<button data-ng-click="openAccordion('chacc')" class="lm-black w3-btn-block w3-left-align w3-border-bottom w3-border-amber">
+					<span class="w3-left">CREATE HUMAN</span>
+				</button>
+				<div class="w3-accordion-content w3-container lm-black w3-text-amber w3-padding-16 mini-padding-vertical" id="chacc">
+					<div>
+						<label class="w3-small w3-left mini-margin-vertical">ENTER NEW NAME OF HUMAN</label>
+						<input data-ng-model="nh.n" class="w3-input w3-amber w3-border w3-border-amber lm-black w3-text-amber w3-round" type="text" data-ng-change="refreshBo()">
+					</div>
+					<hr class="amberline mini-margin-vertical"/>
+					<span class="w3-text-amber line">SEX</span>
+					<div class="ambercheckbox mini-margin-vertical w3-padding-4 padding-horizontal">
+						<input value="None" id="sfalseinpt" name="check" checked="nh.s" type="checkbox" data-ng-model="nh.s">
+						<label for="sfalseinpt"></label>
+					</div>
+					<span class="w3-text-amber">{{nh.s ? 'MAN' : 'WOMAN'}}</span>
+					<hr class="amberline mini-margin-vertical"/>
+					<div class="w3-row">
+						<span class="w3-text-amber w3-col s3 m2 l1">SET START FOOD</span>
+						<div class="w3-col s9 m10 l11">
+							<input type=range min=0 max=1000 step=250 data-ng-model="nh.r.f" class="green lmamber halfwidth">
+							<span class="w3-text-amber line mini-margin-horizontal">{{nh.r.f}}</span>
+						</div>
+					</div>
+					<hr class="amberline mini-margin-vertical"/>
+					<div class="w3-row">
+						<span class="w3-text-amber line w3-col s3 m2 l1">SET START MORALE</span>
+						<div class="w3-col s9 m10 l11">
+							<input type=range min=0 max=1000 step=250 data-ng-model="nh.r.m" class="green lmamber halfwidth">
+							<span class="w3-text-amber line mini-margin-horizontal">{{nh.r.m}}</span>
+						</div>
+					</div>
+					<hr class="amberline mini-margin-vertical"/>
+					<div class="w3-row">
+						<span class="w3-text-amber line w3-col s3 m2 l1">SET START REST</span>
+						<div class="w3-col s9 m10 l11">
+							<input type=range min=0 max=1000 step=250 data-ng-model="nh.r.r" class="green lmamber halfwidth">
+							<span class="w3-text-amber line mini-margin-horizontal">{{nh.r.r}}</span>
+						</div>
+					</div>
+					<hr class="amberline mini-margin-vertical"/>
+					<div class="w3-row">
+						<span class="w3-text-amber line w3-col s3 m2 l1">SET START MONEY</span>
+						<div class="w3-col s9 m10 l11">
+							<input type=range min=0 max=10000 step=50 data-ng-model="nh.m" class="green lmamber halfwidth">
+							<span class="w3-text-amber line mini-margin-horizontal">{{nh.m}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a href="#game">GAME</a>
+			
+			<span>MORE INFO</span>
+			
+			
+			<div class="w3-container w3-dark-grey">
+				<span>CREDITS</span>
+			</div>
+		</div>
+		-->
+		<script src="angular.min.js" type="text/javascript"></script>
+		<script src="appka.js" type="text/javascript"></script>
+		
+	</body>
+</html>
